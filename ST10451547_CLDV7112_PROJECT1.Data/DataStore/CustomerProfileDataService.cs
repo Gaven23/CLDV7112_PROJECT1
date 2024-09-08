@@ -53,16 +53,24 @@ namespace ST10451547_CLDV7112_PROJECT1
             }
         }
 
-        public async Task SaveCustomerProfileAsync(CustomerProfile customerProfile)
+        public async Task SaveCustomerProfileAsync(CustomerProfile customerProfile, CancellationToken cancellationToken = default)
         {
-            if (customerProfile == null)
-            {
-                throw new ArgumentNullException(nameof(customerProfile));
-            }
-
             try
             {
-                await _tableClient.UpsertEntityAsync(customerProfile);
+                var partitionKey = "CustomerPartition";
+                var rowKey = Guid.NewGuid().ToString();
+
+                var entity = new CustomerProfile
+                {
+                    PartitionKey = partitionKey,
+                    RowKey = rowKey,
+                    CustomerName = customerProfile.CustomerName,
+                    CustomerAddress = customerProfile.CustomerAddress,
+                    CustomerCity = customerProfile.CustomerCity,
+                    Timestamp = DateTime.UtcNow,
+                };
+
+                await _tableClient.AddEntityAsync(entity);
             }
             catch (RequestFailedException ex)
             {
@@ -72,7 +80,7 @@ namespace ST10451547_CLDV7112_PROJECT1
             }
             catch (Exception ex)
             {
-                // Log and handle other exceptions
+
                 Console.WriteLine($"Unexpected error saving customer profile: {ex.Message}");
                 throw;
             }

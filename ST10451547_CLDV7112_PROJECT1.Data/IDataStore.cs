@@ -7,7 +7,7 @@ namespace ST10451547_CLDV7112_PROJECT1.Data
         #region Customer Profiles
         Task<IEnumerable<CustomerProfile>> GetCustomerProfilesAsync(CancellationToken cancellationToken = default);
         Task<CustomerProfile?> GetCustomerProfileAsync(Guid profileId, CancellationToken cancellationToken = default);
-        Task SaveCustomerProfileAsync(CustomerProfile customerProfile);
+        Task SaveCustomerProfileAsync(CustomerProfile customerProfile, CancellationToken cancellationToken = default);
 
         #endregion
     }
