@@ -18,6 +18,7 @@ namespace ST10451547_CLDV7112_PROJECT1.Controllers
 
             return View(products.ToList());
         }
+
         public IActionResult Create()
         {
             return View();

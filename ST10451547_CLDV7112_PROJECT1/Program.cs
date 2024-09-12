@@ -1,6 +1,7 @@
 using Azure.Data.Tables;
 using ST10451547_CLDV7112_PROJECT1;
 using ST10451547_CLDV7112_PROJECT1.BusinessLogic;
+using ST10451547_CLDV7112_PROJECT1.Controllers;
 using ST10451547_CLDV7112_PROJECT1.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +16,9 @@ builder.Services.AddSingleton<TableServiceClient>(provider =>
     string connectionString = configuration.GetConnectionString("StorageConnectionString");
     return new TableServiceClient(connectionString);
 });
-builder.Services.AddTransient<IDataStore, CustomerProfileDataService>();
+builder.Services.AddTransient<IDataStore, DataStoreService>();
 builder.Services.AddScoped<CustomerProfileService>();
+builder.Services.AddScoped<CustomerProfileController>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

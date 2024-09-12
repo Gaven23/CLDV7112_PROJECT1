@@ -21,6 +21,7 @@
                                 <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
                                 <th>@Html.DisplayNameFor(model => model.CustomerAddress)</th>
                                 <th>@Html.DisplayNameFor(model => model.CustomerCity)</th>
+                                <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
                                 <th>@Html.DisplayName("Action")</th>
                             </tr>
                         </thead>
@@ -31,8 +32,9 @@
                                     <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerAddress)</td>
                                     <td>@Html.DisplayFor(modelItem => item.CustomerCity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
                                     <td>
-                                        <a asp-action="Update" asp-route-id="@item.PartitionKey"><img class="table-icon" title="Ship and Validated Order Details" /></a>
+                                        <a asp-action="Update" asp-route-id="@item.PartitionKey"><img class="table-icon" title="View Customer Profile" /></a>
                                     </td>
                                 </tr>
                             }
@@ -46,13 +48,9 @@
 
 @section Scripts {
 
-    <!-- jQuery library -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-    <!-- DataTables CSS (Bootstrap 4) -->
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-
-    <!-- DataTables JS (includes jQuery DataTables) -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 

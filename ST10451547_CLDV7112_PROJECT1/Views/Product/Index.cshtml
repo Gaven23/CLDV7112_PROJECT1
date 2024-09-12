@@ -1,0 +1,234 @@
+﻿@model ST10451547_CLDV7112_PROJECT1.Data.Entities.Product;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    .hero {
+        padding: 20px;
+        background-color: #f8f9fa;
+        margin-bottom: 20px;
+    }
+
+    .product-section {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-heading {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .product-item {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+    .product-thumbnail {
+        width: 100%;
+        height: auto;
+    }
+
+    .product-title {
+        font-size: 1.1rem;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    .product-price {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .form-group {
+        margin-top: 20px;
+    }
+
+    .icon-cross img {
+        width: 24px;
+        height: auto;
+        vertical-align: middle;
+    }
+
+    .hide-input {
+        display: none;
+    }
+</style>
+
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Hero Section Content Here -->
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1 class="product-heading">Order Your Favorite Products</h1>
+    <form asp-action="Create">
+        <div class="product-section">
+            <div class="row">
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/images/08a7b230-ee8f-46c0-a945-4e835a3c01c01541402833619-United-Colors-of-Benetton-Men-Sweatshirts-1271541402833444-1.jpg" class="img-fluid product-thumbnail" alt="Custodiuos Masks">
+                        <h3 class="product-title">Men Navy Blue Solid Sweatshirt</h3>
+                        <strong class="product-price">R15000.00</strong>
+                        <input class="hide-input" type="text" value="Men Navy Blue Solid Sweatshirt" asp-for="ProductName">
+                        <input class="hide-input" type="text" value="15000" asp-for="Price">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/Images/11505387708574-Puma-Men-Black-Solid-Sporty-Jacket-371505387708496-1.jpg" class="img-fluid product-thumbnail" alt="Luminous Vases">
+                        <h3 class="product-title">Men Black MAMGP T7 Sweat Sporty Jacket</h3>
+                        <strong class="product-price">R1000.00</strong>
+                        <input class="hide-input" type="text" value="Men Black MAMGP T7 Sweat Sporty Jacket" asp-for="ProductName">
+                        <input class="hide-input" type="text" value="1000" asp-for="Price">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/Images/11520844673915-BARESKIN-Women-Black-Solid-Lightweight-Leather-Jacket-7761520844673718-1.jpg" class="img-fluid product-thumbnail" alt="Luminous Vases">
+                        <h3 class="product-title">Women Black Solid Lightweight Leather Jacket</h3>
+                        <strong class="product-price">R3000.00</strong>
+                        <input class="hide-input" type="text" value="Women Black Solid Lightweight Leather Jacket" asp-for="ProductName">
+                        <input class="hide-input" type="text" value="3000" asp-for="Price">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/Images/624dac60-4c42-4902-bba1-30a51cc7f43c1558948536543-Apple-Unisex-Smart-Watches-1441558948536225-1.jpg" class="img-fluid product-thumbnail" alt="Luminous Vases">
+                        <h3 class="product-title">Apple Unisex Smart Watches</h3>
+                        <strong class="product-price">R7000.00</strong>
+                        <input class="hide-input" type="text" value="Apple Unisex Smart Watches" asp-for="ProductName">
+                        <input class="hide-input" type="text" value="7000" asp-for="Price">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/Images/6661d579-12ae-456b-b8f2-e78e5256a99c1558948436173-Apple-AirPods-with-Charging-Case-2nd-Gen-White-3831558948435-1.jpg" class="img-fluid product-thumbnail" alt="Luminous Vases">
+                        <h3 class="product-title">Apple AirPods With Charging Case 2nd Gen White</h3>
+                        <strong class="product-price">R5000.00</strong>
+                        <input class="hide-input" type="text" value="Apple AirPods With Charging Case 2nd Gen White" asp-for="ProductName">
+                        <input class="hide-input" type="text" value="5000" asp-for="ProductName">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/Images/6bfe80cd-2f55-42bc-aa7f-e0d6c9e2ac531525936414747-SASSAFRAS-Women-Blue-Solid-Shirt-Dress-3831525936414532-1.jpg" class="img-fluid product-thumbnail" alt="Luminous Vases">
+                        <h3 class="product-title">SASSAFRAS-Women-Blue-Solid-Shirt-Dress</h3>
+                        <strong class="product-price">R5000.00</strong>
+                        <input class="hide-input" type="text" value="SASSAFRAS-Women-Blue-Solid-Shirt-Dress" asp-for="ProductName">
+                        <input class="hide-input" type="text" value="5000" asp-for="Price">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/Images/b1373b00-37d4-41a0-a908-5d742a68d3661537343756229-1.jpg" class="img-fluid product-thumbnail" alt="Luminous Vases">
+                        <h3 class="product-title">Women Black Solid Lightweight Leather Jacket</h3>
+                        <strong class="product-price">R3000.00</strong>
+                        <input class="hide-input" type="text" value="3000" asp-for="Price">
+                        <input class="hide-input" type="text" value="Women Black Solid Lightweight Leather Jacket" asp-for="ProductName">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/Images/dc05b5e5-aa82-493e-bf0b-0c309baf21021550920383101-1.jpg" class="img-fluid product-thumbnail" alt="Luminous Vases">
+                        <h3 class="product-title">Luminous Vases</h3>
+                        <strong class="product-price">R5000.00</strong>
+                        <input class="hide-input" type="text" value="5000" asp-for="ProductName">
+                        <input class="hide-input" type="text" value="150000" asp-for="ProductName">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <a class="product-item" href="/Home/Cart/">
+                        <img src="/Images/e533a691-3908-41b0-8307-1928a37d4ec41561362162650-Samsung-Galaxy-Fit-4801561362161527-1.jpg" class="img-fluid product-thumbnail" alt="Luminous Vases">
+                        <h3 class="product-title">Luminous Vases</h3>
+                        <strong class="product-price">R5000.00</strong>
+                        <input class="hide-input" type="text" value="5000" asp-for="ProductName">
+                        <input class="hide-input" type="text" value="150000" asp-for="ProductName">
+                        <div class="form-group">
+                            <input type="submit" value="Order" class="btn btn-primary">
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

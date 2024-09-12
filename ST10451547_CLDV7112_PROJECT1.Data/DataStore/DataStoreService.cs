@@ -1,19 +1,21 @@
 ﻿using Azure;
 using Azure.Data.Tables;
+
+using Microsoft.Extensions.Logging;
 using ST10451547_CLDV7112_PROJECT1.Data;
 using ST10451547_CLDV7112_PROJECT1.Data.Entities;
 
 namespace ST10451547_CLDV7112_PROJECT1
 {
-    public class CustomerProfileDataService : IDataStore
+    public class DataStoreService : IDataStore
     {
         private readonly TableClient _tableClient;
         private const string TableName = "CustomerProfile";
-
-        public CustomerProfileDataService(TableServiceClient client)
+        private const string eName = "Product";
+        public DataStoreService(TableServiceClient client)
         {
             _tableClient = client.GetTableClient(TableName);
-            // Ensure the table is created
+            _tableClient = client.GetTableClient(eName);
             CreateTableIfNotExists().GetAwaiter().GetResult();
         }
 
@@ -25,9 +27,8 @@ namespace ST10451547_CLDV7112_PROJECT1
             }
             catch (RequestFailedException ex)
             {
-                // Log exception details here
                 Console.WriteLine($"Error creating or accessing the table '{TableName}': {ex.Message}");
-                throw; // Re-throw exception to ensure the issue is surfaced
+                throw; 
             }
         }
 
@@ -35,19 +36,17 @@ namespace ST10451547_CLDV7112_PROJECT1
         {
             try
             {
-                string partitionKey = "YourPartitionKey"; // Set appropriate partition key if needed
+                string partitionKey = "YourPartitionKey"; 
                 var response = await _tableClient.GetEntityAsync<CustomerProfile>(partitionKey, profileId.ToString(), cancellationToken: cancellationToken);
                 return response.Value;
             }
             catch (RequestFailedException ex) when (ex.Status == 404)
             {
-                // Handle not found error
                 Console.WriteLine($"Customer profile with ID '{profileId}' not found: {ex.Message}");
                 return null;
             }
             catch (Exception ex)
             {
-                // Log and handle other exceptions
                 Console.WriteLine($"Error retrieving customer profile: {ex.Message}");
                 throw;
             }
@@ -71,6 +70,7 @@ namespace ST10451547_CLDV7112_PROJECT1
                 };
 
                 await _tableClient.AddEntityAsync(entity);
+
             }
             catch (RequestFailedException ex)
             {
@@ -118,5 +118,59 @@ namespace ST10451547_CLDV7112_PROJECT1
 
             return profiles;
         }
+
+        public async Task<Product?> GetProductAsync(Guid productId, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                string partitionKey = "YourPartitionKey";
+                var response = await _tableClient.GetEntityAsync<Product>(partitionKey, productId.ToString(), cancellationToken: cancellationToken);
+                return response.Value;
+            }
+            catch (RequestFailedException ex) when (ex.Status == 404)
+            {
+                Console.WriteLine($"Product '{productId}' not found: {ex.Message}");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving Product: {ex.Message}");
+                throw;
+            }
+        }
+
+        public async Task SaveProductAsync(Product product, CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var partitionKey = "ProductPartition";
+                var rowKey = Guid.NewGuid().ToString();
+
+                var entity = new Product
+                {
+                    PartitionKey = partitionKey,
+                    RowKey = rowKey,
+                    Value = product.Price,
+                    ProductName = product.ProductName,
+                    Timestamp = DateTime.UtcNow,
+                  
+                };
+
+                await _tableClient.AddEntityAsync(entity);
+            }
+            catch (RequestFailedException ex)
+            {
+
+                Console.WriteLine($"Error saving customer profile: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine($"Unexpected error saving customer profile: {ex.Message}");
+                throw;
+            }
+        }
+
     }
 }
