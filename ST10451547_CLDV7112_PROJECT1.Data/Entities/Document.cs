@@ -1,10 +1,14 @@
-﻿using Azure.Data.Tables;
-using Azure;
+﻿using Azure;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ST10451547_CLDV7112_PROJECT1.Data.Entities
 {
-    public class CustomerProfile : ITableEntity
+    public class Document
     {
         public string PartitionKey { get; set; }
         public string CustomerName { get; set; }

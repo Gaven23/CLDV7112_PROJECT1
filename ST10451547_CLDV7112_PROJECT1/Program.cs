@@ -1,4 +1,5 @@
 using Azure.Data.Tables;
+using Azure.Storage.Blobs;
 using ST10451547_CLDV7112_PROJECT1;
 using ST10451547_CLDV7112_PROJECT1.BusinessLogic;
 using ST10451547_CLDV7112_PROJECT1.Controllers;
@@ -16,6 +17,9 @@ builder.Services.AddSingleton<TableServiceClient>(provider =>
     string connectionString = configuration.GetConnectionString("StorageConnectionString");
     return new TableServiceClient(connectionString);
 });
+
+builder.Services.AddSingleton(x => new BlobServiceClient(builder.Configuration.GetConnectionString("StorageConnectionString")));
+
 builder.Services.AddTransient<IDataStore, DataStoreService>();
 builder.Services.AddScoped<CustomerProfileService>();
 builder.Services.AddScoped<CustomerProfileController>();

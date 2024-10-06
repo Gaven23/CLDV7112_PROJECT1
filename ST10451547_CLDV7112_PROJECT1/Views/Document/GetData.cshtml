@@ -1,0 +1,53 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Blob Storage";
+    var errorMessage = TempData[ST10451547_CLDV7112_PROJECT1.Controllers.DocumentController.ErrorMessageKey] as string;
+    var successMessage = TempData[ST10451547_CLDV7112_PROJECT1.Controllers.DocumentController.SuccessMessageKey] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger mb-2" role="alert">
+        @errorMessage
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success mb-2" role="alert">
+        @successMessage
+    </div>
+}
+
+
+
+<table class="table table-bordered mt-3">
+    <thead class="thead-dark">
+        <tr>
+            <th>File Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any()) // Check if Model is not null and has files
+        {
+            foreach (var fileName in Model)
+            {
+                <tr>
+                    <td>@fileName</td>
+                    <td>
+                        <a asp-controller="Document" asp-action="Download" asp-route-fileName="@fileName" class="btn btn-success">Download</a>
+                        <a asp-controller="Document" asp-action="Delete" asp-route-fileName="@fileName" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2" class="text-center"><b>No files found.</b></td>
+            </tr>
+        }
+    </tbody>
+</table>
