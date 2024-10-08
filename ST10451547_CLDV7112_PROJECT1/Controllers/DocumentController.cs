@@ -1,11 +1,6 @@
 ﻿using Azure.Storage.Blobs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 using ST10451547_CLDV7112_PROJECT1.Data.Entities;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace ST10451547_CLDV7112_PROJECT1.Controllers
 {
@@ -79,7 +74,7 @@ namespace ST10451547_CLDV7112_PROJECT1.Controllers
                 var containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
                 var blobClient = containerClient.GetBlobClient(fileName);
 
-                using var memoryStream = new MemoryStream();
+                var memoryStream = new MemoryStream();
                 await blobClient.DownloadToAsync(memoryStream);
                 memoryStream.Position = 0;
                 var contentType = (await blobClient.GetPropertiesAsync()).Value.ContentType;
@@ -89,9 +84,10 @@ namespace ST10451547_CLDV7112_PROJECT1.Controllers
             catch (Exception ex)
             {
                 TempData[ErrorMessageKey] = "An error occurred while downloading the file: " + ex.Message;
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(GetData));
             }
         }
+
 
         public async Task<IActionResult> Delete(string fileName)
         {
@@ -106,7 +102,7 @@ namespace ST10451547_CLDV7112_PROJECT1.Controllers
             {
                 TempData[ErrorMessageKey] = "An error occurred while deleting the file: " + ex.Message;
             }
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(GetData));
         }
     }
 }
